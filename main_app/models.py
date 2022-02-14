@@ -7,6 +7,7 @@ class Dog(models.Model):
     description = models.TextField(max_length=250)
     size = models.CharField(max_length=50)
     age = models.IntegerField()
+    image = models.CharField(max_length=300)
 
     def __str__(self):
         return self.name
