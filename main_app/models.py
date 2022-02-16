@@ -2,6 +2,7 @@ from django.db import models
 from django.forms import DateField
 from django.urls import reverse
 
+
 # Create your models here.
 class Walker(models.Model):
     name = models.CharField(max_length=50)
