@@ -66,22 +66,22 @@
 </div>
 </div>
 
-  <hr />
-  <div class="row">
-    <div class="col s6">
-      <h3>{{ dog.name }}'s Walkers</h3>
-      {% if dog.walkers.count %} {% for walker in dog.walkers.all %}
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">
-            <span>{{ walker.name }} is walking {{dog.name}} on {{walker.date}}</span>
-          </span>
-        </div>
+<hr />
+<div class="row">
+  <div class="col s6">
+    <h3>{{ dog.name }}'s Walkers</h3>
+    {% if dog.walker.count %} {% for walker in dog.walker.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          <span>{{walker.name}} is walking {{dog.name}} on {{walker.date}}</span>
+        </span>
       </div>
-      {% endfor %} {% else %}
-      <h5>No One Scheduled to Walk {{dog.name}} Today</h5>
-      {% endif %}
     </div>
+    {% endfor %} {% else %}
+    <h5>No Walker Scheduled</h5>
+    {% endif %}
+  </div>
 
 <script>
   var dateEl = document.getElementById('id_date');

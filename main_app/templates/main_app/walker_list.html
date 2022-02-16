@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Walker List</h1>
+
+{% for walker in walker_list %}
+
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ walker.name }} on {{walker.date}}</span>
+    </div>
+</div>
+<div>
+    
+{% endfor %} {% endblock %}

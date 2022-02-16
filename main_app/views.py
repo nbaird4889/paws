@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Dog, Visitors, Photo
+from django.views.generic import ListView, DetailView
+from .models import Dog, Visitors, Photo, Walker
 from .forms import VisitorsForm
 import uuid
 import boto3
@@ -64,3 +65,22 @@ def add_photo(request, dog_id):
         except:
             print('An error occurred uploading file to S3')
     return redirect('detail', dog_id=dog_id)
+
+class WalkerList(ListView):
+    model = Walker
+
+class WalkerDetail(DetailView):
+    model = Walker
+
+class WalkerCreate(CreateView):
+    model = Walker
+    fields = '__all__'
+
+
+class WalkerUpdate(UpdateView):
+  model = Walker
+  fields = '__all__'
+
+class WalkerDelete(DeleteView):
+  model = Walker
+  success_url = '/walkers/'
