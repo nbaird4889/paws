@@ -15,8 +15,9 @@
         <div class="nav-wrapper">
               <a href="/"><h2>PAWS</h2></a>
           <ul>
-            <li><a href="/about">About</a></li>
-            <li><a href="/dogs">Dogs</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'index' %}">Available Dogs</a></li>
+            <li><a href="{% url 'dogs_create' %}">Add a Dog</a></li>
           </ul>
         </div>
       </nav>
