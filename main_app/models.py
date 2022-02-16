@@ -1,7 +1,15 @@
 from django.db import models
+from django.forms import DateField
 from django.urls import reverse
 
 # Create your models here.
+class Walker(models.Model):
+    name = models.CharField(max_length=50)
+    date = models.DateField('Working On:')
+
+    def __str__(self):
+        return f"Walker is {self.name}"
+
 class Dog(models.Model):
     name = models.CharField(max_length=50)
     breed = models.CharField(max_length=50)
@@ -9,6 +17,7 @@ class Dog(models.Model):
     size = models.CharField(max_length=50)
     age = models.IntegerField()
     image = models.CharField(max_length=300)
+    walker = models.ManyToManyField(Walker)
 
     def __str__(self):
         return self.name

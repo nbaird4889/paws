@@ -1,5 +1,22 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Paws</h1>
-<p>The Ruff Days are Over</p>
-<p>We provide homes to dogs.</p>
+<div class = 'hero'>
+    <div class="hero-text">
+        <h1>Paws</h1>
+        <p>The Ruff Days are Over</p>
+    </div>
+</div>  
+
+<div class = "available-home">
+    <div class="available-text">
+        <h2>About Us</h2>
+        <p>
+            Founded in 2022 with a mission to place stray dogs in loving homes. We are a no-kill shelter with the ultimate goal of finding every single dog a permanent forever home. Check out all of our available dogs!
+        </p>
+        <a href="/dogs/" class="waves-effect waves-light light-blue btn">See Dogs</a>
+    </div>
+    <div>
+        <img class = "available-image" img src="https://res.cloudinary.com/dhbumhhh1/image/upload/c_scale,w_2000/v1645037228/james-barker-v3-zcCWMjgM-unsplash_ugzti6.jpg" alt="chocolate lab dog" />
+    </div>
+</div>
+
 {% endblock %}

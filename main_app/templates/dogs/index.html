@@ -1,13 +1,21 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Dog List</h1>
+<h1>All of Our Dogs</h1>
 
 {% for dog in dogs %}
-<div class="card">
-    <a href="{% url 'detail' dog.id %}">
-  <div class="card-content">
-    <img src="{{dog.image}}" alt="dog" />
+<div class="container">
+<div class="row">
+  <div class="card index" class = "col s6">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="{{dog.image}}" alt="dog">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">{{dog.name}}</span>
+      <p><a href="{% url 'detail' dog.id %}">Learn more about {{dog.name}}</a></p>
+    </div>
   </div>
-</a>
 </div>
+</div>
+
+
 {% endfor %} {% endblock %}

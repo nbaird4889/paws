@@ -20,14 +20,13 @@
         <div>
               <a href="/" class="brand-logo logo">PAWS</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'index' %}">Available Dogs</a></li>
             <li><a href="{% url 'dogs_create' %}">Add a Dog</a></li>
           </ul>
         </div>
       </nav>
     </header>
-    <main class="container">{% block content %} {% endblock %}</main>
+    <main >{% block content %} {% endblock %}</main>
     <footer class="page-footer teal darken-4">
       <div class="tagline">
         Making Ruff Days Better Since 2022

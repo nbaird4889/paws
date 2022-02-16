@@ -1,69 +1,87 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Dog Details</h1>
+<h1 class="detail-headline">{{dog.name}}'s Details</h1>
 
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ dog.name }}</span>
-    <p>Breed: {{ dog.breed }}</p>
-    <p>Description: {{ dog.description }}</p>
-    {% if dog.age > 0 %}
-    <p>Age: {{ dog.age }}</p>
-    {% else %}
-    <p>Age: Puppy</p>
-    {% endif %}
-    <p>{{ dog.size }}</p>
-    <img src="{{dog.image}}" alt="dog" />
-  </div>
-  <div class="card-action">
-    <a href="{% url 'dogs_update' dog.id %}">Edit</a>
-    <a href="{% url 'dogs_delete' dog.id %}">Delete</a>
-  </div>
-  <div>
-
-      <form action="{% url 'add_visitors' dog.id %}" method="post">
-        {% csrf_token %} {{ visitors_form.as_p }}
-        <input type="submit" class="btn" value="Add Visitor" />
-      </form>
-  
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ dog.name }}</span>
+        <p>Breed: {{ dog.breed }}</p>
+        <p>Description: {{ dog.description }}</p>
+        <p>Estimated Size: {{dog.size}}
+        {% if dog.age > 0 %}
+        <p>Age: {{ dog.age }}</p>
+        {% else %}
+        <p>Age: Puppy</p>
+        {% endif %}
+      </div>
+      <div class="card-action">
+        <a href="{% url 'dogs_update' dog.id %}">Edit</a>
+        <a href="{% url 'dogs_delete' dog.id %}">Delete</a>
+      </div>
     </div>
-    <table>
+  </div>
+  <h4>Visitors</h2>
+  <div class="col s6">
+
+    <form action="{% url 'add_visitors' dog.id %}" method="post">
+      {% csrf_token %} {{ visitors_form.as_p }}
+      <input type="submit" class="btn" value="Add Visitor" />
+    </form>
+
+    <table class="striped">
       <thead>
         <tr>
           <th>Date</th>
-          <th>Visitor</th>
+          <th>Name</th>
         </tr>
       </thead>
       <tbody>
-        {% for visitor in dog.visitors_set.all %}
+        {% for visitors in dog.visitors_set.all %}
         <tr>
-          <td>{{visitor.date}}</td>
-          <td>{{visitor.name}}</td>
+          <td>{{visitors.date}}</td>
+          <td>{{visitors.name}}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+      {% for photo in dog.photo_set.all %}
+        <img class="responsive-img card-panel" src="{{photo.url}}">
+      {% empty %}
+        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+      {% endfor %}
+      <form
+        action="{% url 'add_photo' dog.id %}"
+        enctype="multipart/form-data"
+        method="POST"
+        class="card-panel"
+      >
+      {% csrf_token %}
+        <input type="file" name="photo-file" />
+        <br /><br />
+        <input type="submit" class="btn" value="Upload Photo" />
+      </form>
   </div>
-
-  {% for photo in dog.photo_set.all %}
-    <img class="responsive-img card-panel" src="{{photo.url}}" />
-  {% empty %}
-    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-  {% endfor %}
-
-  <!-- new code below -->
-  <form
-    action="{% url 'add_photo' dog.id %}"
-    enctype="multipart/form-data"
-    method="POST"
-    class="card-panel"
-  >
-    {% csrf_token %}
-    <input type="file" name="photo-file" />
-    <br /><br />
-    <input type="submit" class="btn" value="Upload Photo" />
-  </form>
 </div>
+</div>
+
+  <hr />
+  <div class="row">
+    <div class="col s6">
+      <h3>{{ dog.name }}'s Walkers</h3>
+      {% if dog.walkers.count %} {% for walker in dog.walkers.all %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
+            <span>{{ walker.name }} is walking {{dog.name}} on {{walker.date}}</span>
+          </span>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <h5>No One Scheduled to Walk {{dog.name}} Today</h5>
+      {% endif %}
+    </div>
 
 <script>
   var dateEl = document.getElementById('id_date');
