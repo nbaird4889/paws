@@ -35,7 +35,7 @@ def add_visitors(request, dog_id):
 
 class DogCreate(CreateView):
   model = Dog
-  fields = '__all__'
+  fields = ['name', 'breed', 'description', 'size', 'age', 'image']
 
 
 class DogUpdate(UpdateView):
